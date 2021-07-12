@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cars{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Cars For Sale</h1>
+
+
+        <div class="row mt-4">
+            {% for car in cars %}
+                <div class="card mx-2" style="width: 18rem;">
+                    {% for image in car.images %}
+                        <img src="{{ asset("uploads/"~image.url) }}" class="card-img-top my-2" alt="{{ image.alt }} ">
+                    {% endfor %}
+                    <div class="card-body ">
+                        <h5 class="card-title">{{ car.brand.name }} - {{ car.model }}</h5>
+                        <ul>
+                            <li>FuelType: {{ car.energy.type }}</li>
+                            <li> Gears: {{ car.gear ? 'Yes': 'No' }}</li>
+                        </ul>
+                        <div class="container">
+                            <div class="row">
+                                <a href="{{ path ("car_detail",{'car': car.id}) }}" class="btn btn-primary
+                                my-1">Details</a>
+                                <a href="{{ path ("car_update",{'car': car.id}) }}" class="btn btn-info my-1">Update
+                                    Car</a>
+                                <a href="{{ path ("car_add",{'car': car.id}) }}" class="btn btn-warning my-1">Add
+                                    Car</a>
+                                <a href="{{ path ("car_delete",{'car': car.id}) }}" class="btn btn-danger
+                                my-1">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% for message in app.session.flashbag.get("notice") %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Images{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1>Cars For Sale</h1>
+
+
+        <div class="row mt-4">
+            {% for image in images %}
+                <div class="card mx-2 mb-2" style="width: 18rem;">
+                    <div class="card-body">
+
+                        <img src="{{ asset("uploads/"~image.url) }}" class="card-img-top my-2" alt="{{ image.alt }} ">
+                        <h5 class="card-title">{{ image.name }}</h5>
+
+                        <div class="container">
+                            <div class="row">
+{#                                <a href="{{ path ("image_detail",{'image': image.id}) }}" class="btn btn-primary#}
+{#                                my-1">Details</a>#}
+{#                                <a href="{{ path ("image_update",{'image': image.id}) }}" class="btn btn-info my-1">Update#}
+{#                                    image</a>#}
+{#                                <a href="{{ path ("image_add",{'image': image.id}) }}" class="btn btn-warning my-1">Add#}
+{#                                    image</a>#}
+{#                                <a href="{{ path ("image_delete",{'image': image.id}) }}" class="btn btn-danger#}
+{#                                my-1">Delete</a>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

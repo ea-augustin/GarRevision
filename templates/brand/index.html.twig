@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Brands{% endblock %}
+
+ {% block stylesheets %}
+     {{ parent() }}
+     <link href="{{ asset('css/datatables.css') }}" rel="stylesheet"/>
+ {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+     <script src="{{ asset('js/datatables.js') }}" type="text/javascript"></script>
+
+ {% endblock %}
+
+{% block body %}
+    <section class="py-5 mt-5">
+
+        <div class="primary-overlay ">
+            <div class="container">
+                <table class="table text-center table_id">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Logo</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">Add</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for brand in brands %}
+                        {% dump(brands) %}
+                        <tr>
+                            <td>{{ brand.id }}</td>
+                            <td>{{ brand.name }}</td>
+
+                            <td><img style="max-height: 150px" src="{{ brand.logo.url }}"
+                                     alt="{{brand
+                                     .logo.alt }}"></td>
+
+
+                            <td><a href="{{ path ("brand_detail",{'brand': brand.id}) }}" class="btn
+                          btn-primary">Details</a></td>
+                            <td><a href="{{ path ("brand_add",{'brand': brand.id}) }}" class="btn
+                          btn-success">Add</a></td>
+                            <td><a href="{{ path ("brand_update",{'brand': brand.id}) }}" class="btn
+                          btn-info">Update</a></td>
+                            <td><a href="{{ path ("brand_delete",{'brand': brand.id}) }}" class="btn
+                          btn-danger">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

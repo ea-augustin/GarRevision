@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail{% endblock %}
+
+{% block body %}
+
+    <div class="container text-center">
+        {% if brand.logo is not empty %}
+            <div class="jumbotron">
+                <img style="max-height: 150px" src="{{ brand.logo.url }}" alt="{{ brand.logo.alt }}">
+                <h1 class="display-4">{{ brand.name }}</h1>
+                <hr class="my-4">
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                </p>
+            </div>
+        {% else %}
+            <div class="center">
+                <img class="mini-image" src="{{ asset('images/no-picture.png') }}" alt="No Image">
+            </div>
+        {% endif %}
+    </div>
+    <div class="container">
+        <div class="row mt-4">
+            {% for car in brand.cars %}
+                <div class="card mx-2" style="width: 18rem;">
+                    <div class="card-body ">
+
+                        <h5 class="card-title">{{brand.name }} </h5>
+                        <p class="card-title">{{ car.model }} </p>
+                        <ul>
+                            <li>FuelType: {{ car.energy.type }}</li>
+                            <li> Gears: {{ car.gear ? 'Yes': 'No' }}</li>
+                        </ul>
+                        <a href="{{ path ("car_detail",{'car': car.id}) }}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Brand Manager{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if app.request.get('_route') == "brand_add" %}
+            <h1>Add Brand</h1>
+        {% else %}
+            <h1>Edit Brand</h1>
+        {% endif %}
+
+            {{ form_start(form) }}
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.url) }}
+            {{ form_row(form.save) }}
+
+            {{ form_end(form) }}
+
+    </div>
+{% endblock %}

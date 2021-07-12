@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Car Manager{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if app.request.get('_route') == "car_add" %}
+            <h1>Add Car</h1>
+        {% else %}
+            <h1>Edit Car</h1>
+        {% endif %}
+
+        {{ form_start(form) }}
+
+        {{ form_row(form.brand) }}
+        {{ form_row(form.model) }}
+        {{ form_row(form.gear) }}
+        {{ form_row(form.energy) }}
+        {{ form_row(form.image) }}
+        {{ form_row(form.save) }}
+
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

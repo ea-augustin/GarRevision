@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Details{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-md-12 text-center">
+            <h1>{{ car.brand.name }} - {{ car.model }}</h1>
+        </div>
+
+        {% if car.images is not empty %}
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for image in car.images %}
+                        <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                            <img src="{{ image.url }}" class="d-block w-100" alt="{{ image.alt }}">
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if car.images|length > 1 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="center">
+                <img class="mini-image" src="{{ asset('images/no-picture.png') }}" alt="No Image">
+            </div>
+        {% endif %}
+
+        <ul>
+            <li {% if car.energy.type == "Electric" %}Class="text-primary"{% endif %}
+                    {% if car.energy.type == "Diesel" %}Class="text-danger"{% endif %}
+                    {% if car.energy.type == "Gas" %}Class="text-warning"{% endif %}
+                    {% if car.energy.type == "Hybrid" %}Class="text-info"{% endif %}
+            >Energy: {{ car.energy.type }} </li>
+            <li>GearBox: {{ car.gear ? 'Yes': 'No' }}</li>
+        </ul>
+    </div>
+{% endblock %}
